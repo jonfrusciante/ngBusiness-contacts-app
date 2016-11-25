@@ -15,6 +15,17 @@ export class AppComponent implements OnInit {
   appState: string;
   activeKey: string;
 
+  activeCompany:string;
+  activeCategory:string;
+  activeYearsInBusiness:string;
+  activeDescription:string;
+  activePhone:string;
+  activeEmail:string;
+  activeStreetAddress:string;
+  activeCity:string;
+  activeState:string;
+  activeZipcode:string;
+
    constructor(private _firebaseService: FirebaseService) {
 
    }
@@ -71,5 +82,43 @@ export class AppComponent implements OnInit {
        this._firebaseService.addBussines(newBussines);
 
        this.changeState('default');
+   }
+
+   showEdit(bussines){
+     this.changeState('edit', bussines.$key);
+     this.activeCompany =          bussines.company;
+     this.activeCategory =         bussines.category;
+     this.activeYearsInBusiness =  bussines.years_in_business;
+     this.activeDescription =      bussines.description;
+     this.activePhone =            bussines.phone;
+     this.activeEmail =            bussines.email;
+     this.activeStreetAddress =    bussines.street_address;
+     this.activeCity =             bussines.city;
+     this.activeState =            bussines.state;
+     this.activeZipcode =          bussines.zipcode;
+   }
+
+   updateBussines() {
+     var updBussines = {
+       company:this.activeCompany,
+       category:this.activeCategory,
+       years_in_business:this.activeYearsInBusiness,
+       description:this.activeDescription,
+       phone:this.activePhone,
+       email:this.activeEmail,
+       street_address:this.activeStreetAddress,
+       city:this.activeCity,
+       state:this.activeState,
+       zipcode:this.activeZipcode
+     }
+
+     this._firebaseService.updateBussines(this.activeKey, updBussines);
+
+     this.changeState('default');
+   }
+
+   deleteBussines(key) {
+     this._firebaseService.deleteBussines(key);
+     this.changeState('default');
    }
 }

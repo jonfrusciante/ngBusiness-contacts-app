@@ -36,4 +36,10 @@ export class FirebaseService {
   addBussines(newBussines) {
     return this.bussiness.push(newBussines);
   }
+  updateBussines(key, updBussines) {
+    return this.bussiness.update(key, updBussines);
+  }
+  deleteBussines(key) {
+    return this.bussiness.remove(key);
+  }
 }
