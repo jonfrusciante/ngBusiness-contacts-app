@@ -1,3 +1,74 @@
-<ul *ngFor="let bussines of bussiness">
-  <li>{{bussines.company}}</li>
-</ul>
+<div class="top-bar">
+  <div class="row">
+    <div class="top-bar-left">
+      <ul class="menu">
+        <li class="menu-text">ngFrenzy - BusinessContacts</li>
+      </ul>
+    </div>
+    <div class="top-bar-right">
+
+    </div>
+  </div>
+</div>
+<br>
+
+  <div *ngIf="appState == 'extend'">
+    <div class="row">
+      <div class="large-12 columns">
+        <button (click)="changeState('default')" class="button">Go Back</button>
+      </div>
+    </div>
+
+
+  <div *ngFor="let bussines of bussiness">
+    <div *ngIf="bussines.$key == activeKey">
+      <div class="row">
+        <div class="large-5 columns large-offset-1">
+          <h3>{{bussines.company}}</h3>
+          <p>Category: {{bussines.category}}</p>
+          <p>Years In Business: {{bussines.years_in_business}}</p>
+          <p>{{bussines.description}}</p>
+        </div>
+        <div class="large-5 columns large-offset-1">
+          <h4>Contact Info</h4>
+          <ul>
+            <li>Phone: {{bussines.phone}}</li>
+            <li>Email: {{bussines.email}}</li>
+            <li>Street: {{bussines.street_address}}</li>
+            <li>City: {{bussines.city}}</li>
+            <li>State: {{bussines.state}}</li>
+            <li>Zipcode: {{bussines.zipcode}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div *ngIf="bussiness">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Category</th>
+            <th>Phone</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bussines of bussiness">
+            <td>{{bussines.company}}</td>
+            <td>{{bussines.category}}</td>
+            <td>{{bussines.phone}}</td>
+            <td>
+              <button (click)="changeState('extend', bussines.$key)" class="button">More</button>
+              <button class="button secondary">Edit</button>
+              <button class="button alert">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
