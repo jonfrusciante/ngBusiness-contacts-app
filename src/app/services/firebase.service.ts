@@ -13,9 +13,19 @@ export class FirebaseService {
 
   }
 
-  getBussiness() {
-    this.bussiness = this._af.database.list('/bussiness') as
-    FirebaseListObservable<Bussines[]>
+  getBussiness(category:string = null) {
+    if(category != null) {
+      this.bussiness = this._af.database.list('/bussiness', {
+        query: {
+          orderByChild: 'category',
+          equalTo: category
+        }
+      }) as
+      FirebaseListObservable<Bussines[]>
+    } else {
+        this.bussiness = this._af.database.list('/bussiness') as
+        FirebaseListObservable<Bussines[]>
+    }
     return this.bussiness;
   }
   getCategories() {
